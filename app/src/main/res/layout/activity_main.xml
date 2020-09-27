@@ -5,6 +5,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="15dp"
+    android:background="@color/white"
     tools:context=".MainActivity">
-    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/tje_logo" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_id"
+        android:textSize="16sp"
+        android:layout_marginTop="15dp"/>
+
+    <EditText
+        android:id="@+id/idEdt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="이메일 양식으로 입력"
+        android:inputType="textEmailAddress"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_pw"
+        android:textSize="16sp"
+        android:layout_marginTop="15dp"/>
+
+    <EditText
+        android:id="@+id/pwEdt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="비밀번호 입력"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="로그인" />
+
 </LinearLayout>
