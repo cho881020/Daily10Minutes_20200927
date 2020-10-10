@@ -38,13 +38,29 @@ class MainActivity : BaseActivity() {
 
                     if (codeNum == 200) {
 
+//                        응용문제 : 로그인 성공시 로그인한 사용자의 닉네임 토스트 출력
+//                        json > data > user > nick_name 추출
+
+                        val dataObj = json.getJSONObject("data")
+                        val userObj = dataObj.getJSONObject("user")
+
+                        val userNickName = userObj.getString("nick_name")
+
+                        runOnUiThread {
+                            Toast.makeText(mContext, "${userNickName}님 환영합니다!", Toast.LENGTH_SHORT).show()
+                        }
+
                     }
                     else {
 //                        로그인 실패 => 토스트로 로그인 실패 안내.
 //                        토스트 : UI 동작 -> UI Thread가 실행하도록 해야함.
 
+//                        연습문제 : 로그인 실패시 실패 사유를 서버가 알려주는 이유로 출력.
+
+                        val message = json.getString("message")
+
                         runOnUiThread {
-                            Toast.makeText(mContext, "로그인 실패", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
                         }
                     }
 
