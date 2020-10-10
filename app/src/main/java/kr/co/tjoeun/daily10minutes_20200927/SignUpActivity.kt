@@ -18,6 +18,11 @@ class SignUpActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+//                    응용문제
+//                    검사를 통과하고 나서 이메일 입력값이 변경되면 재검사 요구.
+//                    이메일 입력값 변경 감지 (구글링) => "중복 검사를 해주세요." 문구 변경
+
+
         emailCheckBtn.setOnClickListener {
 
             val inputEmail = idEdt.text.toString()
@@ -25,7 +30,25 @@ class SignUpActivity : BaseActivity() {
             ServerUtil.getRequestEmailCheck(inputEmail, object : ServerUtil.JsonResponseHandler {
                 override fun onResponse(json: JSONObject) {
 
+//                    연습문제
+//                    이메일 사용 가능 : "사용해도 좋은 이메일입니다." 문구 변경
+//                    불가 : "사용할 수 없는 이메일입니다. 다른 이메일로 다시 검사해주세요." 문구 변경
+//                    Toast X, 텍스트뷰 문구 변경
 
+                    val code = json.getInt("code")
+
+                    if (code == 200) {
+
+                        runOnUiThread {
+                            emailCheckResultTxt.text = "사용해도 좋은 이메일입니다."
+                        }
+                    }
+                    else {
+
+                        runOnUiThread {
+                            emailCheckResultTxt.text = "사용할 수 없는 이메일입니다. 다른 이메일로 다시 검사해주세요."
+                        }
+                    }
 
                 }
 
