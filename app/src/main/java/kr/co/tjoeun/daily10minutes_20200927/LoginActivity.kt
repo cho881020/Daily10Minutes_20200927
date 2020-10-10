@@ -55,6 +55,12 @@ class LoginActivity : BaseActivity() {
 
                         runOnUiThread {
                             Toast.makeText(mContext, "${userNickName}님 환영합니다!", Toast.LENGTH_SHORT).show()
+
+                            val myIntent = Intent(mContext, MainActivity::class.java)
+                            startActivity(myIntent)
+
+//                            메인화면으로 이동하면 로그인 화면은 종료처리.
+                            finish()
                         }
 
                     }
