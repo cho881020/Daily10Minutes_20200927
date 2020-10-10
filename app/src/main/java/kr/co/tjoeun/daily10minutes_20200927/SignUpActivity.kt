@@ -18,6 +18,21 @@ class SignUpActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+        emailCheckBtn.setOnClickListener {
+
+            val inputEmail = idEdt.text.toString()
+
+            ServerUtil.getRequestEmailCheck(inputEmail, object : ServerUtil.JsonResponseHandler {
+                override fun onResponse(json: JSONObject) {
+
+
+
+                }
+
+            })
+
+        }
+
         signUpBtn.setOnClickListener {
 
 //            아이디/비번/닉네임을 => 회원가입 API에 전달 => 결과 확인 / 화면 처리
