@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.TextView
+import com.bumptech.glide.Glide
 import kr.co.tjoeun.daily10minutes_20200927.R
 import kr.co.tjoeun.daily10minutes_20200927.datas.Project
 
@@ -24,8 +27,20 @@ class ProjectAdapter(
         }
 
         val row = tempRow!!
-        
-//        실제 데이터 반영 필요
+
+//        뿌려줄 데이터
+        val projectData = mList[position]
+
+//        내용이 뿌려질 뷰 가져오기
+        val projectImg = row.findViewById<ImageView>(R.id.projectImg)
+        val projectTitleTxt = row.findViewById<TextView>(R.id.projectTitleTxt)
+        val projectDescTxt = row.findViewById<TextView>(R.id.projectDescTxt)
+
+//        실 데이터 반영
+        projectTitleTxt.text = projectData.title
+        projectDescTxt.text = projectData.desc
+
+        Glide.with(mContext).load(projectData.imageURL).into(projectImg)
         
         return row
     }
