@@ -19,6 +19,7 @@
         android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/idEdt"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -44,6 +45,7 @@
         android:layout_marginTop="20dp" />
 
     <EditText
+        android:id="@+id/pwEdt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="8글자 이상으로 해주세요."
@@ -57,12 +59,14 @@
         android:layout_marginTop="10dp"/>
 
     <EditText
+        android:id="@+id/nickNameEdt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:singleLine="true"
         android:hint="한글 / 영문 모두 가능합니다." />
 
     <Button
+        android:id="@+id/signUpBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="가입하기"/>
