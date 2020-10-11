@@ -25,6 +25,36 @@ class ViewProjectDetailActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+        giveUpBtn.setOnClickListener {
+
+//            포기 신청 API 호출 - DELETE 메쏘드 예제
+
+            ServerUtil.deleteRequestGiveUpProject(mContext, mProject.id, object : ServerUtil.JsonResponseHandler {
+                override fun onResponse(json: JSONObject) {
+
+                    val code = json.getInt("code")
+
+                    if (code == 200) {
+
+//                        서버에서 변경된 프로젝트 정보를 안내려준다. 새로고침 못하는가?
+//                        새로 데이터를 다시 확인해보자. => 서버에 현재 상태 다시 조회
+
+                        getProjectInfoFromServer()
+
+                    }
+                    else {
+                        runOnUiThread {
+                            Toast.makeText(mContext, "참여중인 프로젝트가 아닙니다.", Toast.LENGTH_SHORT).show()
+                        }
+
+                    }
+
+                }
+
+            })
+
+        }
+
         applyBtn.setOnClickListener {
 
             val alert = AlertDialog.Builder(mContext)
