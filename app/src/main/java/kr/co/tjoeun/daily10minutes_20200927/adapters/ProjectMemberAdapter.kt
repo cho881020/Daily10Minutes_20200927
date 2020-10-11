@@ -38,6 +38,9 @@ class ProjectMemberAdapter(
         userNickNameTxt.text = userData.nickName
         userEmailTxt.text = userData.email
 
+//        사용자 프사중 0번째 프사를 => 이미지뷰에 반영
+        Glide.with(mContext).load(userData.profileImageList[0]).into(userProfileImg)
+
         return row
     }
 
