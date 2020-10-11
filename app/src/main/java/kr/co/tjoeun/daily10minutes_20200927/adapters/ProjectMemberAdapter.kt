@@ -29,6 +29,15 @@ class ProjectMemberAdapter(
 
         val row = tempRow!!
 
+        val userData = mList[position]
+
+        val userProfileImg = row.findViewById<ImageView>(R.id.userProfileImg)
+        val userNickNameTxt = row.findViewById<TextView>(R.id.userNickNameTxt)
+        val userEmailTxt = row.findViewById<TextView>(R.id.userEmailTxt)
+
+        userNickNameTxt.text = userData.nickName
+        userEmailTxt.text = userData.email
+
         return row
     }
 
