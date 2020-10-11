@@ -39,7 +39,7 @@ class MainActivity : BaseActivity() {
 
 //        서버에 프로젝트 목록 요청 => 응답을 분석 => 목록에 담아주는 코드
 
-        ServerUtil.getRequestProjectList(object : ServerUtil.JsonResponseHandler {
+        ServerUtil.getRequestProjectList(mContext, object : ServerUtil.JsonResponseHandler {
             override fun onResponse(json: JSONObject) {
 
                 val dataObj = json.getJSONObject("data")
