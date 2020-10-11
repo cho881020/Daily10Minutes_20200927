@@ -92,11 +92,7 @@ class MainActivity : BaseActivity() {
 
 //                    추출된 JSONObject를 가지고 => Project 클래스로 변환.
 
-                    val tempProject = Project()
-                    tempProject.id = projectObj.getInt("id")
-                    tempProject.title = projectObj.getString("title")
-                    tempProject.imageURL = projectObj.getString("img_url")
-                    tempProject.desc = projectObj.getString("description")
+                    val tempProject = Project.getProjectFromJSON(projectObj)
 
 //                    완성된 Project 클래스를 => mProjectList 에 추가.
 

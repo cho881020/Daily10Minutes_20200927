@@ -1,5 +1,6 @@
 package kr.co.tjoeun.daily10minutes_20200927.datas
 
+import org.json.JSONObject
 import java.io.Serializable
 
 class Project : Serializable {
@@ -11,4 +12,38 @@ class Project : Serializable {
     var imageURL = ""
     var desc = ""
 
+//    JSONObject를 넣으면 => 파싱을 통해서 => Project 객체로 변환해주는 (단순)기능.
+
+    companion object {
+
+        fun getProjectFromJSON(json:JSONObject) : Project {
+
+//            기본적인 Project 객체 생성
+            val p = Project()
+
+//            재료로 들어오는 json을 이용해서 내용 변수 채워주기
+            p.id = json.getInt("id")
+            p.title = json.getString("title")
+            p.imageURL = json.getString("img_url")
+            p.desc = json.getString("description")
+
+
+//            완성된 Project 객체를 결과로 리턴.
+            return p
+
+        }
+
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
