@@ -1,8 +1,11 @@
 package kr.co.tjoeun.daily10minutes_20200927
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_view_project_detail.*
 import kr.co.tjoeun.daily10minutes_20200927.datas.Project
@@ -21,6 +24,45 @@ class ViewProjectDetailActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        applyBtn.setOnClickListener {
+
+            val alert = AlertDialog.Builder(mContext)
+            alert.setTitle("프로젝트 참가 신청")
+            alert.setMessage("${mProject.title} 프로젝트에 도전 하시겠습니까?")
+            alert.setPositiveButton("도전", DialogInterface.OnClickListener { dialog, which ->
+
+//                참여 신청 API 호출
+
+                ServerUtil.postRequestApplyProject(mContext, mProject.id, object : ServerUtil.JsonResponseHandler {
+
+                    override fun onResponse(json: JSONObject) {
+
+                        val code = json.getInt("code")
+
+                        if (code == 200) {
+
+                        }
+                        else {
+                            val message = json.getString("message")
+
+                            runOnUiThread {
+                                Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
+                    }
+
+                })
+
+
+            })
+            alert.setNegativeButton("취소", DialogInterface.OnClickListener { dialog, which ->
+                Toast.makeText(mContext, "준비가 되면 도전해주세요.", Toast.LENGTH_SHORT).show()
+            })
+            alert.show()
+
+        }
 
         viewMembersBtn.setOnClickListener {
 
