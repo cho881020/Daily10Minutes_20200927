@@ -1,10 +1,12 @@
 package kr.co.tjoeun.daily10minutes_20200927
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
 import kr.co.tjoeun.daily10minutes_20200927.adapters.ProjectAdapter
 import kr.co.tjoeun.daily10minutes_20200927.datas.Project
+import kr.co.tjoeun.daily10minutes_20200927.utils.ContextUtil
 import kr.co.tjoeun.daily10minutes_20200927.utils.ServerUtil
 import org.json.JSONObject
 
@@ -22,6 +24,20 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        logoutBtn.setOnClickListener {
+
+//            로그아웃 버튼이 눌리면? 로그아웃 => 기기에 저장된 토큰값 삭제
+
+            ContextUtil.setLoginUserToken(mContext, "")
+
+//            다시 로딩화면으로 돌아가기
+            val myIntent = Intent(mContext, SplashActivity::class.java)
+            startActivity(myIntent)
+
+            finish()
+
+        }
 
     }
 
