@@ -142,6 +142,19 @@ class ViewProjectDetailActivity : BaseActivity() {
         userCountTxt.text = "${mProject.ongoingUserCount}명"
 
         proofMethodTxt.text = mProject.proofMethod
+
+//        내 참여 상태 : ONGOING - 진행중이니 중도포기만 활성화
+//        그 외 (null - 신청 한번도 안함, FAIL - 중도 포기 / 실패)
+
+        if (mProject.myLastStatus == "ONGOING") {
+            giveUpBtn.isEnabled = true
+            applyBtn.isEnabled = false
+        }
+        else {
+            applyBtn.isEnabled = true
+            giveUpBtn.isEnabled = false
+        }
+
     }
 
 }
