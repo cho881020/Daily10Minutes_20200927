@@ -52,6 +52,13 @@ class ViewProjectDetailActivity : BaseActivity() {
 
                 mProject = Project.getProjectFromJSON(projectObj)
 
+                runOnUiThread {
+
+//                    새로 갱신된 mProject를 이용해 화면에 새로 데이터 반영
+                    userCountTxt.text = "${mProject.ongoingUserCount}명"
+
+                }
+
             }
 
         })

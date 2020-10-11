@@ -12,6 +12,8 @@ class Project : Serializable {
     var imageURL = ""
     var desc = ""
 
+    var ongoingUserCount = 0 // 현재 프로젝트 참여 인원 수
+
 //    JSONObject를 넣으면 => 파싱을 통해서 => Project 객체로 변환해주는 (단순)기능.
 
     companion object {
@@ -26,6 +28,9 @@ class Project : Serializable {
             p.title = json.getString("title")
             p.imageURL = json.getString("img_url")
             p.desc = json.getString("description")
+
+//            현재 인원수도 추가 파싱
+            p.ongoingUserCount = json.getInt("ongoing_users_count")
 
 
 //            완성된 Project 객체를 결과로 리턴.
