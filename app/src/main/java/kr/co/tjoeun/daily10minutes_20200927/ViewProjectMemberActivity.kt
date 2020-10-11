@@ -38,7 +38,23 @@ class ViewProjectMemberActivity : BaseActivity() {
         ServerUtil.getRequestProjectMembersById(mContext, mProject.id, object : ServerUtil.JsonResponseHandler {
             override fun onResponse(json: JSONObject) {
 
+                val dataObj = json.getJSONObject("data")
+                val projectObj = dataObj.getJSONObject("project")
 
+                val ongoingUsersArr = projectObj.getJSONArray("ongoing_users")
+
+                for (i in    0 until ongoingUsersArr.length()) {
+
+                    val ongoingUserObj = ongoingUsersArr.getJSONObject(i)
+
+//                    진행중인 사람의 JSONObj 추출된 상황. => User 형태로 변환
+                    val user = User.getUserFromJSON(ongoingUserObj)
+
+//                    만들어진 User 객체를 => 목록에 추가
+
+                    mMemberList.add(user)
+
+                }
 
             }
         })
