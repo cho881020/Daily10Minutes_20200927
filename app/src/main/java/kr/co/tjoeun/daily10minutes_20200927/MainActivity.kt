@@ -1,8 +1,10 @@
 package kr.co.tjoeun.daily10minutes_20200927
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_main.*
 import kr.co.tjoeun.daily10minutes_20200927.adapters.ProjectAdapter
 import kr.co.tjoeun.daily10minutes_20200927.datas.Project
@@ -28,14 +30,22 @@ class MainActivity : BaseActivity() {
         logoutBtn.setOnClickListener {
 
 //            로그아웃 버튼이 눌리면? 로그아웃 => 기기에 저장된 토큰값 삭제
+//            연습문제 : 바로 로그아웃이 아니라, 진짜 로그아웃할건지 물어보고 처리.
 
-            ContextUtil.setLoginUserToken(mContext, "")
+            val alert = AlertDialog.Builder(mContext)
+            alert.setTitle("로그아웃")
+            alert.setMessage("정말 로그아웃 하시겠습니까?")
+            alert.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, which ->
+                ContextUtil.setLoginUserToken(mContext, "")
 
 //            다시 로딩화면으로 돌아가기
-            val myIntent = Intent(mContext, SplashActivity::class.java)
-            startActivity(myIntent)
+                val myIntent = Intent(mContext, SplashActivity::class.java)
+                startActivity(myIntent)
 
-            finish()
+                finish()
+            })
+            alert.setNegativeButton("취소", null)
+            alert.show()
 
         }
 
