@@ -58,7 +58,8 @@ class LoginActivity : BaseActivity() {
 
 //                        토큰값 추출 => 변수에 저장 (기기에 저장 X)
                         val token = dataObj.getString("token")
-                        
+//                        SharedPreferences를 이용해 기기에 저장. (ContextUtil 클래스 활용)
+                        ContextUtil.setLoginUserToken(mContext, token)
 
                         runOnUiThread {
 
