@@ -63,7 +63,6 @@ class LoginActivity : BaseActivity() {
 
                         runOnUiThread {
 
-
                             Toast.makeText(mContext, "${userNickName}님 환영합니다!", Toast.LENGTH_SHORT).show()
 
                             val myIntent = Intent(mContext, MainActivity::class.java)

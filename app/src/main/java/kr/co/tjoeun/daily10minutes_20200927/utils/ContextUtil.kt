@@ -21,6 +21,13 @@ class ContextUtil {
             pref.edit().putString(LOGIN_USER_TOKEN, token).apply()
         }
 
+//        저장된 토큰 조회 함수 (getter) 생성
+
+        fun getLoginUserToken(context: Context) : String {
+            val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+            return pref.getString(LOGIN_USER_TOKEN, "")!!
+        }
+
     }
 
 }
