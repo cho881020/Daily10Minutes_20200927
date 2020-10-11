@@ -27,6 +27,18 @@ class MainActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+        projectListView.setOnItemClickListener { parent, view, position, id ->
+
+//            "눌린 프로젝트" 정보를 가지고 상세화면으로 이동
+
+            val clickedProject = mProjectList[position]
+
+            val myIntent = Intent(mContext, ViewProjectDetailActivity::class.java)
+            myIntent.putExtra("projectInfo", clickedProject)
+            startActivity(myIntent)
+
+        }
+
         logoutBtn.setOnClickListener {
 
 //            로그아웃 버튼이 눌리면? 로그아웃 => 기기에 저장된 토큰값 삭제

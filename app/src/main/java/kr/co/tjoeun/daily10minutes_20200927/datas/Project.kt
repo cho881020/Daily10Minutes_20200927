@@ -1,6 +1,8 @@
 package kr.co.tjoeun.daily10minutes_20200927.datas
 
-class Project {
+import java.io.Serializable
+
+class Project : Serializable {
 
 //    서버에서 내려주는 참여가능 프로젝트의 데이터(하위정보) 를 담기 위한 변수들.
 
