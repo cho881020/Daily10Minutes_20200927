@@ -2,8 +2,11 @@ package kr.co.tjoeun.daily10minutes_20200927
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import kr.co.tjoeun.daily10minutes_20200927.datas.Project
 
 class ViewProofListActivity : BaseActivity() {
+
+    lateinit var mProject : Project
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,6 +20,9 @@ class ViewProofListActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
+        mProject = intent.getSerializableExtra("project") as Project
+
 
 
     }

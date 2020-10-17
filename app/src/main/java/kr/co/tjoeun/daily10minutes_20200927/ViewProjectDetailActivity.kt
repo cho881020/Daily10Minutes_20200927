@@ -25,6 +25,12 @@ class ViewProjectDetailActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+        viewProofBtn.setOnClickListener {
+            val myIntent = Intent(mContext, ViewProofListActivity::class.java)
+            myIntent.putExtra("project", mProject)
+            startActivity(myIntent)
+        }
+
         giveUpBtn.setOnClickListener {
 
 //            포기 신청 API 호출 - DELETE 메쏘드 예제
