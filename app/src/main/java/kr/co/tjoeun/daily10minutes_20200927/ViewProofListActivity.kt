@@ -1,6 +1,7 @@
 package kr.co.tjoeun.daily10minutes_20200927
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_view_proof_list.*
 import kr.co.tjoeun.daily10minutes_20200927.adapters.ProofAdapter
@@ -28,6 +29,14 @@ class ViewProofListActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+//        인증글 작성 버튼 눌리면 프로젝트를 들고 작성화면으로 이동.
+
+        writeProofBtn.setOnClickListener {
+            val myIntent = Intent(mContext, EditProofActivity::class.java)
+            myIntent.putExtra("project", mProject)
+            startActivity(myIntent)
+        }
 
 //        날짜 선택버튼이 눌리면 => 달력 띄워서 선택 받기
         selectDateBtn.setOnClickListener {
