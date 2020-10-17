@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_view_proof_list.*
 import kr.co.tjoeun.daily10minutes_20200927.datas.Project
+import kr.co.tjoeun.daily10minutes_20200927.utils.ServerUtil
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -40,8 +42,12 @@ class ViewProofListActivity : BaseActivity() {
 
 //                Log.d("선택된날짜", sdf.format(selectedDate.time))
 
-                selectedDateTxt.text = sdf.format(selectedDate.time)
+                val selectedDateStr = sdf.format(selectedDate.time)
 
+                selectedDateTxt.text = selectedDateStr
+
+//                선택된 날짜의 게시글을 가져오자.
+                getProofListFromServerByDate(selectedDateStr)
 
             }, 2020, Calendar.JUNE, 10)
 
@@ -64,6 +70,19 @@ class ViewProofListActivity : BaseActivity() {
         val today = Calendar.getInstance()
         val sdf = SimpleDateFormat("yyyy-MM-dd")
         selectedDateTxt.text = sdf.format(today.time)
+
+    }
+
+//    서버에서 날짜별 인증글 가져오기 - 재료 : "2020-06-09" 등의 String
+
+    fun getProofListFromServerByDate(date: String) {
+
+        ServerUtil.getRequestProjectProofListByIdAndDate(mContext, mProject.id, date, object : ServerUtil.JsonResponseHandler {
+            override fun onResponse(json: JSONObject) {
+
+            }
+
+        })
 
     }
 
