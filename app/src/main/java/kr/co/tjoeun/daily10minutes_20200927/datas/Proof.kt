@@ -26,6 +26,9 @@ class Proof {
             proof.id = json.getInt("id")
             proof.content = json.getString("content")
 
+//            인증글 파싱할때, 작성자 정보도 파싱하자.
+            proof.writer = User.getUserFromJSON(json.getJSONObject("user"))
+
             return proof
 
         }
