@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import kr.co.tjoeun.daily10minutes_20200927.datas.Project
+import java.text.SimpleDateFormat
 import java.util.*
 
 class ViewProofListActivity : BaseActivity() {
@@ -36,6 +37,17 @@ class ViewProofListActivity : BaseActivity() {
         Log.d("캘린더연습-년도", today.get(Calendar.YEAR).toString())
         Log.d("캘린더연습-월", today.get(Calendar.MONTH).toString()) // Calendar는 0~11월 까지 있다.
         Log.d("캘린더연습-일", today.get(Calendar.DAY_OF_MONTH).toString())
+
+//        로그로 2020-10-17 양식으로 today를 출력.
+
+        val sdf = SimpleDateFormat("yyyy-MM-dd")
+
+        Log.d("양식1번", sdf.format(today.time))
+
+//        로그로 200805 양식으로 today 출력
+
+        val sdf2 = SimpleDateFormat("yyMMdd")
+        Log.d("양식2번", sdf2.format(today.time))
 
 
 //        오늘이 아닌, 다른 날짜를 세팅? set
