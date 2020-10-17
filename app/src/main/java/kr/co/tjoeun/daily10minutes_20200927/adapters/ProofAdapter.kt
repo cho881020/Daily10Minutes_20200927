@@ -13,7 +13,7 @@ import kr.co.tjoeun.daily10minutes_20200927.datas.Project
 import kr.co.tjoeun.daily10minutes_20200927.datas.Proof
 import kr.co.tjoeun.daily10minutes_20200927.datas.User
 
-class Proofdapter(
+class ProofAdapter(
     val mContext: Context,
     resId: Int,
     val mList: List<Proof>) : ArrayAdapter<Proof>(mContext, resId, mList) {

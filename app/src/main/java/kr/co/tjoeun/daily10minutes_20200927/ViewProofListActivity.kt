@@ -1,10 +1,9 @@
 package kr.co.tjoeun.daily10minutes_20200927
 
 import android.app.DatePickerDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import kotlinx.android.synthetic.main.activity_view_proof_list.*
+import kr.co.tjoeun.daily10minutes_20200927.adapters.ProofAdapter
 import kr.co.tjoeun.daily10minutes_20200927.datas.Project
 import kr.co.tjoeun.daily10minutes_20200927.datas.Proof
 import kr.co.tjoeun.daily10minutes_20200927.utils.ServerUtil
@@ -18,6 +17,8 @@ class ViewProofListActivity : BaseActivity() {
     lateinit var mProject : Project
 
     val mProofList = ArrayList<Proof>()
+
+    lateinit var mProofAdapter : ProofAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,6 +76,10 @@ class ViewProofListActivity : BaseActivity() {
         val sdf = SimpleDateFormat("yyyy-MM-dd")
         selectedDateTxt.text = sdf.format(today.time)
 
+//        어댑터 리스트뷰 연결
+        mProofAdapter = ProofAdapter(mContext, R.layout.proof_list_item, mProofList)
+        proofListView.adapter = mProofAdapter
+
     }
 
 //    서버에서 날짜별 인증글 가져오기 - 재료 : "2020-06-09" 등의 String
@@ -97,6 +102,8 @@ class ViewProofListActivity : BaseActivity() {
 
 //                리스트뷰어댑터에게 새로고침
                 runOnUiThread {
+
+                    mProofAdapter.notifyDataSetChanged()
 
                 }
 
