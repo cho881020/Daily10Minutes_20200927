@@ -63,6 +63,21 @@ class ProofAdapter(
             Glide.with(mContext).load(proofData.imageList[0]).into(proofImg)
         }
 
+//        내 좋아요 여부에 따른 배경색 / 글씨 색 변경
+
+        if (proofData.isMyLike) {
+//            res 폴더 의 자원으로 배경 설정 : setBackgroundResource
+            likeBtn.setBackgroundResource(R.drawable.red_border_box)
+
+//            res 폴더의 자원으로 글씨 색 설정 : 제공되는 함수 X
+//            (Context의 도움을 받아서) 직접 res폴더로 가서 => 그 안의 color값 추출
+            likeBtn.setTextColor(mContext.resources.getColor(R.color.red))
+        }
+        else {
+            likeBtn.setBackgroundResource(R.drawable.gray_border_box)
+            likeBtn.setTextColor(mContext.resources.getColor(R.color.darkGray))
+        }
+
 //        좋아요 갯수
 
         likeBtn.text = "좋아요 ${proofData.likeCount}개"
