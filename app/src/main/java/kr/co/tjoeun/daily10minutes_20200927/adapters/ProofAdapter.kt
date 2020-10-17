@@ -73,6 +73,14 @@ class ProofAdapter(
             ServerUtil.postRequestLikeProof(mContext, proofData.id, object : ServerUtil.JsonResponseHandler {
                 override fun onResponse(json: JSONObject) {
 
+//                    서버에서 주는 응답을 보면 이 인증글의 최신상태를 내려줌.
+//                    이 글을 파싱해서 => 리스트 내용 일부 변경
+
+//                    proofData 변수가 목록에 등장 => proofData 변수의 일부 내용 변경 : 목록에 변경 반영
+
+                    proofData.likeCount = json.getJSONObject("data").getJSONObject("like").getInt("like_count")
+                    proofData.isMyLike = json.getJSONObject("data").getJSONObject("like").getBoolean("my_like")
+
                     val message = json.getString("message")
 
 //                    어댑터는 액티비티가 아님. runOnUiThread 기능을 갖고있지 않다.
@@ -85,6 +93,9 @@ class ProofAdapter(
 //                    UI쓰레드에 post {  } 내부의 코드를 실행하도록 요청
                     myHandler.post {
                         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+
+//                        변수의 변경 내용을 리스트뷰에 반영
+                        notifyDataSetChanged()
                     }
 
                 }
