@@ -50,6 +50,43 @@
 
            </LinearLayout>
 
+
+       </LinearLayout>
+
+       <TextView
+           android:id="@+id/contentTxt"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="10dp"
+           android:text="인증글 내용 자리" />
+
+       <ImageView
+           android:id="@+id/proofImg"
+           android:layout_width="match_parent"
+           android:layout_height="250dp"
+           tools:src="@mipmap/ic_launcher"
+           android:layout_marginTop="10dp"
+           android:scaleType="centerCrop"/>
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal">
+
+           <Button
+               android:id="@+id/likeBtn"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:text="좋아요 n개"/>
+
+           <Button
+               android:id="@+id/replyBtn"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:text="댓글 달기"/>
+
        </LinearLayout>
 
    </LinearLayout>
