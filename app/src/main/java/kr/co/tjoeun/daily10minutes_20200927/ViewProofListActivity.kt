@@ -6,14 +6,18 @@ import android.os.Bundle
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_view_proof_list.*
 import kr.co.tjoeun.daily10minutes_20200927.datas.Project
+import kr.co.tjoeun.daily10minutes_20200927.datas.Proof
 import kr.co.tjoeun.daily10minutes_20200927.utils.ServerUtil
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ViewProofListActivity : BaseActivity() {
 
     lateinit var mProject : Project
+
+    val mProofList = ArrayList<Proof>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +83,22 @@ class ViewProofListActivity : BaseActivity() {
 
         ServerUtil.getRequestProjectProofListByIdAndDate(mContext, mProject.id, date, object : ServerUtil.JsonResponseHandler {
             override fun onResponse(json: JSONObject) {
+
+//                mProofList에 데이터 채워주고 => 리스트뷰 새로고침
+
+                val dataObj = json.getJSONObject("data")
+                val projectObj = dataObj.getJSONObject("project")
+                val proofsArr = projectObj.getJSONArray("proofs")
+
+                for (i in    0 until proofsArr.length()) {
+//                    JSONObject 추출 => Proof 형태로 변경 => mProofList에 추가
+                    mProofList.add(Proof.getProofFromJson(proofsArr.getJSONObject(i)))
+                }
+
+//                리스트뷰어댑터에게 새로고침
+                runOnUiThread {
+
+                }
 
             }
 
