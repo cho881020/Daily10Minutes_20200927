@@ -37,9 +37,25 @@
 
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/proofListView"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/proofListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/writeProofBtn"
+            android:layout_width="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_height="wrap_content"
+            android:text="인증글 올리기" />
+
+    </FrameLayout>
+
 
 </LinearLayout>
