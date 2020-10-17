@@ -1,5 +1,6 @@
 package kr.co.tjoeun.daily10minutes_20200927
 
+import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +21,33 @@ class ViewProofListActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+//        날짜 선택버튼이 눌리면 => 달력 띄워서 선택 받기
+        selectDateBtn.setOnClickListener {
+
+//            DatePickerDialog 활용
+            val dpd = DatePickerDialog(mContext, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+
+//                선택된 년/월/일 을 가지고 할 일 작성
+//                선택된 년월일 => 2020-05-06 양식으로 가공해서 로그 출력
+
+                val selectedDate = Calendar.getInstance() // 오늘날짜가 들어있는 상태
+//                선택된 년월일 일괄 적용
+                selectedDate.set(year, month, dayOfMonth)
+
+//                날짜 변환 양식 생성
+                val sdf = SimpleDateFormat("yyyy-MM-dd")
+
+//                Log.d("선택된날짜", sdf.format(selectedDate.time))
+
+                selectedDateTxt.text = sdf.format(selectedDate.time)
+
+
+            }, 2020, Calendar.JUNE, 10)
+
+            dpd.show()
+
+        }
 
     }
 
