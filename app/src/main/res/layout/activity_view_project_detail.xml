@@ -126,6 +126,13 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/viewProofBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="인증글 보러가기" />
+
     </LinearLayout>
 
 </LinearLayout>
