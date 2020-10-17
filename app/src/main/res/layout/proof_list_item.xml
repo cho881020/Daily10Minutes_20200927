@@ -85,7 +85,7 @@
            <Button
                android:id="@+id/replyBtn"
                android:layout_width="0dp"
-               android:background="@drawable/gray_border_box"
+               android:background="@drawable/black_border_box"
                android:layout_height="wrap_content"
                android:layout_marginLeft="3dp"
                android:layout_weight="1"
