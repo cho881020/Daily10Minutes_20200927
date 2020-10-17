@@ -80,6 +80,10 @@ class ViewProofListActivity : BaseActivity() {
         mProofAdapter = ProofAdapter(mContext, R.layout.proof_list_item, mProofList)
         proofListView.adapter = mProofAdapter
 
+//        today / sdf를 이용해서, 오늘날짜의 게시글 목록 가져오기
+
+        getProofListFromServerByDate(sdf.format(today.time))
+
     }
 
 //    서버에서 날짜별 인증글 가져오기 - 재료 : "2020-06-09" 등의 String
@@ -88,6 +92,9 @@ class ViewProofListActivity : BaseActivity() {
 
         ServerUtil.getRequestProjectProofListByIdAndDate(mContext, mProject.id, date, object : ServerUtil.JsonResponseHandler {
             override fun onResponse(json: JSONObject) {
+
+//                기존에 들어있던 인증글들은 모두 날려주고 (clear)
+                mProofList.clear()
 
 //                mProofList에 데이터 채워주고 => 리스트뷰 새로고침
 
