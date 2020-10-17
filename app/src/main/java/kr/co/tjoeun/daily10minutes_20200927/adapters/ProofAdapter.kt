@@ -51,6 +51,17 @@ class ProofAdapter(
         val sdf = SimpleDateFormat("yyyy년 M월 d일 a h시 m분")
         writtenDateTimeTxt.text = sdf.format(proofData.proofTime.time)
 
+//        인증글의 이미지가 0개 : 이미지뷰 숨김
+//        그렇지 않다 (1개 이상) : 이미지뷰 보여주기 + Glide 이미지 세팅 (편의상 0번째)
+
+        if (proofData.imageList.size == 0) {
+            proofImg.visibility = View.GONE
+        }
+        else {
+            proofImg.visibility = View.VISIBLE
+            Glide.with(mContext).load(proofData.imageList[0]).into(proofImg)
+        }
+
         return row
     }
 
