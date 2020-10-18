@@ -6,6 +6,7 @@ import android.view.View
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_view_proof_reply_list.*
 import kr.co.tjoeun.daily10minutes_20200927.datas.Proof
+import kr.co.tjoeun.daily10minutes_20200927.utils.TimeUtil
 
 class ViewProofReplyListActivity : BaseActivity() {
 
@@ -37,6 +38,8 @@ class ViewProofReplyListActivity : BaseActivity() {
             proofImg.visibility = View.VISIBLE
             Glide.with(mContext).load(mProof.imageList[0]).into(proofImg)
         }
+
+        writtenDateTimeTxt.text = TimeUtil.getTimeAgoByCalendar(mProof.proofTime)
 
     }
 
