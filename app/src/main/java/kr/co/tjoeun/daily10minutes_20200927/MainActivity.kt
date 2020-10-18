@@ -84,6 +84,22 @@ class MainActivity : BaseActivity() {
 
             override fun onResponse(json: JSONObject) {
 
+                val dataObj = json.getJSONObject("data")
+                val notiCount = dataObj.getInt("unread_noti_count")
+
+//                알림 0개 : 빨간 점 숨김
+//                하나라도 있다 : 보여주기 + 갯수 반영
+
+                runOnUiThread {
+                    if (notiCount == 0) {
+                        notiCountTxt.visibility = View.GONE
+                    }
+                    else {
+                        notiCountTxt.visibility = View.VISIBLE
+                        notiCountTxt.text = notiCount.toString()
+                    }
+                }
+
             }
 
         })
