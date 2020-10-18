@@ -4,8 +4,10 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_main.*
 import kr.co.tjoeun.daily10minutes_20200927.adapters.ProjectAdapter
 import kr.co.tjoeun.daily10minutes_20200927.datas.Project
@@ -24,6 +26,10 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         setupEvents()
         setValues()
+
+//        FCM 서버에 등록된 기기토큰값 확인
+        Log.d("디바이스토큰", FirebaseInstanceId.getInstance().token!!)
+
     }
 
     override fun setupEvents() {
