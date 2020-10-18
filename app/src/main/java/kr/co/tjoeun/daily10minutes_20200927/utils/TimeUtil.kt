@@ -1,5 +1,6 @@
 package kr.co.tjoeun.daily10minutes_20200927.utils
 
+import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -26,7 +27,20 @@ class TimeUtil {
 
 //        현재시간 - 게시글작성시간 시차가 얼마냐?
 
-            val now = Calendar.getInstance() // 현재 시간
+            val now = Calendar.getInstance() // 현재 시간 : 개개인의 폰에 설정된 현재 시간.
+//            시차를 고려해서 => 세계표준시간과의 차이값을 구해야함.
+//            현재시간(한국) => 현재시간(표준시) 로 변경해야함. 그 후 차이값 계산.
+
+//            시간대 : 내 폰에 설정된 TimeZone 를 구하자.
+            val myPhoneTimeZone = now.timeZone
+
+//            세계 표준시와의 시차
+//            시차를 시간단위로 변경
+            val timeOffset = myPhoneTimeZone.rawOffset / 1000 / 60 / 60 // 시차를 밀리초단위로 알려줌.
+
+//            현재시간의 시차를 보정. (계산된 시차만큼 빼주자.)
+            now.add(Calendar.HOUR, -timeOffset)
+
 //        재료로 들어오는 비교할 시간 : cal
 
 //        둘의 시간 차이? now->정수변환  - proofTime->정수변환 => ?밀리초 차이인지 계산됨.
