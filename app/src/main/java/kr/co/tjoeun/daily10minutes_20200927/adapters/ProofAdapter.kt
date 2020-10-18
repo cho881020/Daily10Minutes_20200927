@@ -15,6 +15,8 @@ import kr.co.tjoeun.daily10minutes_20200927.datas.User
 import kr.co.tjoeun.daily10minutes_20200927.utils.ServerUtil
 import org.json.JSONObject
 import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.math.min
 
 class ProofAdapter(
     val mContext: Context,
@@ -49,8 +51,56 @@ class ProofAdapter(
         writerNickNameTxt.text = proofData.writer.nickName
 
 //        인증글 시간정보 => 2020년 5월 8일 오후 3시 1분 양식으로 출력
-        val sdf = SimpleDateFormat("yyyy년 M월 d일 a h시 m분")
-        writtenDateTimeTxt.text = sdf.format(proofData.proofTime.time)
+
+//        기능 추가
+//        20초 이내에 쓴 글 - 방금 전
+//        1분 이내에 쓴 글 - ?초 전
+//        1시간 이내에 쓴 글 - ?분 전
+//        24시간 이내에 쓴글 - ?시간 전
+//        1주일이내에 쓴글 - ?일 전
+//        그보다 더 오래전에 쓴 글 - ~년 ~월 ~일 오전/오후 ~시 ~분
+
+//        현재시간 - 게시글작성시간 시차가 얼마냐?
+
+        val now = Calendar.getInstance() // 현재 시간
+//        게시글 작성 시간? proofData.proofTime
+
+//        둘의 시간 차이? now->정수변환  - proofTime->정수변환 => ?밀리초 차이인지 계산됨.
+        val diffTime = now.timeInMillis - proofData.proofTime.timeInMillis
+
+        if (diffTime < 20 * 1000) {
+//            20초 이내의 시차 - 방금 전
+            writtenDateTimeTxt.text = "방금 전"
+        }
+        else if (diffTime < 1 * 60 * 1000) {
+//            1분 이내의 시차 - ?초 전
+//            밀리초 -> ?초 로 계산 => 밀리초 / 1000
+            val sec = diffTime / 1000
+            writtenDateTimeTxt.text = "${sec}초 전"
+        }
+        else if (diffTime < 1 * 60 * 60 * 1000) {
+//            1시간 이내 - ?분 전
+//            밀리초 -> ?분 전 => 밀리초 / 1000 / 60
+
+            val minute = diffTime / 1000 / 60
+            writtenDateTimeTxt.text = "${minute}분 전"
+        }
+        else if (diffTime < 24 * 60 * 60 * 1000) {
+//            하루 이내 - ?시간 전 => 밀리초 / 1000 / 60 / 60
+            val hour = diffTime / 1000 / 60 / 60
+            writtenDateTimeTxt.text = "${hour}시간 전"
+        }
+        else if (diffTime < 7 * 24 * 60 * 60 * 1000) {
+//            1주일 이내
+            val day = diffTime / 1000 / 60 / 60 / 24
+            writtenDateTimeTxt.text = "${day}시간 전"
+        }
+        else {
+//            1주일이 넘어가는 경우 - 날짜 양식 가공
+            val sdf = SimpleDateFormat("yyyy년 M월 d일 a h시 m분")
+            writtenDateTimeTxt.text = sdf.format(proofData.proofTime.time)
+        }
+
 
 //        인증글의 이미지가 0개 : 이미지뷰 숨김
 //        그렇지 않다 (1개 이상) : 이미지뷰 보여주기 + Glide 이미지 세팅 (편의상 0번째)
