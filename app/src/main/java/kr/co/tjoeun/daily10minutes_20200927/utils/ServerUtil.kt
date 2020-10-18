@@ -215,6 +215,47 @@ class ServerUtil {
 
         }
 
+        fun getRequestReplyListByProofId(context:Context, proofId:Int, handler: JsonResponseHandler?) {
+
+            val client = OkHttpClient()
+
+//            어느 주소로 가야하는가? 동일.
+//            차이점 : 주소를 적을때 => 어떤 데이터가 첨부되는지 (파라미터)도 같이 적어야함.
+//            POST / PUT 등은 formData 를 이용하지만, GET에서는 주소에 적는다.
+
+//            URL에 파라미터들을 쉽게 첨부하도록 도와주는 URL가공기 생성.
+            val urlBuilder = "${HOST_URL}/project_proof/${proofId}".toHttpUrlOrNull()!!.newBuilder()
+//            URL 가공기를 이용해서 필요한 파라미터들을 쉽게 첨부.
+//            urlBuilder.addEncodedQueryParameter("email", emailAddress)
+
+//            가공이 끝난 URL을 urlString으로 완성.
+            val urlString = urlBuilder.build().toString()
+
+//            임시 확인 : 어떻게 url이 완성되었는지 확인
+            Log.d("완성된URL", urlString)
+
+            val request = Request.Builder()
+                .url(urlString)
+                .get()
+                .header("X-Http-Token", ContextUtil.getLoginUserToken(context)) // 필요시 첨부
+                .build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    val bodyString = response.body!!.string()
+                    val jsonObj = JSONObject(bodyString)
+                    Log.d("서버응답본문", jsonObj.toString())
+                    handler?.onResponse(jsonObj)
+                }
+
+            })
+
+        }
+
         fun getRequestProjectInfoById(context:Context, projectId:Int, handler: JsonResponseHandler?) {
 
             val client = OkHttpClient()
