@@ -12,4 +12,14 @@
         android:textSize="18sp"
         android:layout_gravity="center"/>
 
+    <ImageView
+        android:id="@+id/notiImg"
+        android:layout_width="40dp"
+        android:visibility="gone"
+        android:layout_height="40dp"
+        android:src="@drawable/bell_icon"
+        android:layout_gravity="right|center_vertical"
+        android:padding="5dp"
+        android:layout_marginRight="10dp"/>
+
 </FrameLayout>

@@ -2,11 +2,15 @@ package kr.co.tjoeun.daily10minutes_20200927
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 
 abstract class BaseActivity : AppCompatActivity() {
+
+//    커스텀 액션바에 만들어둔 화면 요소들
+    lateinit var notiImg : ImageView
 
     val mContext = this
 
@@ -48,6 +52,9 @@ abstract class BaseActivity : AppCompatActivity() {
 //        androidx 의 툴바 사용
         val parentToolBar = myActionBar.customView.parent as Toolbar
         parentToolBar.setContentInsetsAbsolute(0,0)
+
+//        액션바 xml에 있는 뷰들을 => lateinit var 변수에 연결. (코틀린에서 사용 가능)
+        notiImg = myActionBar.customView.findViewById(R.id.notiImg)
 
     }
 
