@@ -1,6 +1,8 @@
 package kr.co.tjoeun.daily10minutes_20200927.adapters
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +13,9 @@ import com.bumptech.glide.Glide
 import kr.co.tjoeun.daily10minutes_20200927.R
 import kr.co.tjoeun.daily10minutes_20200927.datas.Project
 import kr.co.tjoeun.daily10minutes_20200927.datas.Reply
+import kr.co.tjoeun.daily10minutes_20200927.utils.ServerUtil
 import kr.co.tjoeun.daily10minutes_20200927.utils.TimeUtil
+import org.json.JSONObject
 
 class ReplyAdapter(
     val mContext: Context,
@@ -60,6 +64,37 @@ class ReplyAdapter(
         createdAtTxt.text = TimeUtil.getTimeAgoByCalendar(replyData.createdAt)
 
         likeCountTxt.text = "좋아요 ${replyData.likeCount}개"
+
+        myLikeImg.setOnClickListener {
+
+            ServerUtil.postRequestLikeProofReply(mContext, replyData.id, object : ServerUtil.JsonResponseHandler {
+                override fun onResponse(json: JSONObject) {
+
+                    val dataObj = json.getJSONObject("data")
+                    val likeObj = dataObj.getJSONObject("like")
+
+//                    이 줄의 댓글(replyData)에서, 좋아요 갯수 / 내 좋아요 여부만 변경해서 새로고침.
+
+                    replyData.likeCount = likeObj.getInt("like_count")
+                    replyData.isMyLike = likeObj.getBoolean("my_like")
+
+                    val myHandler = Handler(Looper.getMainLooper())
+
+                    myHandler.post {
+//                        runOnUiThread와 같은 쓰레드에서 실행되는 코드.
+
+//                        startActivity, runOnUiThread 등은 액티비티의 고유기능
+//                        notifyDataSetChanged 는 어댑터의 고유 기능.
+                        notifyDataSetChanged()
+
+                    }
+
+
+                }
+
+            })
+
+        }
 
         return row
     }
