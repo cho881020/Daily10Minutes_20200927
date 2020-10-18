@@ -1,6 +1,7 @@
 package kr.co.tjoeun.daily10minutes_20200927.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.*
 import com.bumptech.glide.Glide
 import kr.co.tjoeun.daily10minutes_20200927.R
+import kr.co.tjoeun.daily10minutes_20200927.ViewProofReplyListActivity
 import kr.co.tjoeun.daily10minutes_20200927.datas.Project
 import kr.co.tjoeun.daily10minutes_20200927.datas.Proof
 import kr.co.tjoeun.daily10minutes_20200927.datas.User
@@ -166,6 +168,18 @@ class ProofAdapter(
                 }
 
             })
+
+        }
+
+
+//        댓글 달기 버튼 누르면 => 해당 인증글의 댓글 목록 화면으로.
+
+        replyBtn.setOnClickListener {
+
+            val myIntent = Intent(mContext, ViewProofReplyListActivity::class.java)
+            myIntent.putExtra("proof", proofData)
+//            어댑터는 startActivity 기능 X. mContext (어떤화면?)의 기능을 활용.
+            mContext.startActivity(myIntent)
 
         }
 
