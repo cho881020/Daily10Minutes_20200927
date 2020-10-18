@@ -19,7 +19,7 @@ class Reply : Serializable {
 
     companion object {
 
-        private val serverTimeFormat = SimpleDateFormat("yyyy-MM-ss HH:mm:ss")
+        private val serverTimeFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 
         fun getReplyFromJSON(json: JSONObject) : Reply {
 
