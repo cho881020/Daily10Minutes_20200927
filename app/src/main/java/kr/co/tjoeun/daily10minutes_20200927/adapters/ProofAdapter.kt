@@ -95,7 +95,7 @@ class ProofAdapter(
         else if (diffTime < 7 * 24 * 60 * 60 * 1000) {
 //            1주일 이내
             val day = diffTime / 1000 / 60 / 60 / 24
-            writtenDateTimeTxt.text = "${day}시간 전"
+            writtenDateTimeTxt.text = "${day}일 전"
         }
         else {
 //            1주일이 넘어가는 경우 - 날짜 양식 가공
