@@ -109,6 +109,15 @@ class ViewProofReplyListActivity : BaseActivity() {
 
                 runOnUiThread {
                     mReplyAdapter.notifyDataSetChanged()
+
+//                    불편사항 개선
+//                    1. 입력되어있는 내용 삭제 => EditText는 setText로 내용 설정.
+                    replyContentEdt.setText("")
+//                    2. 리스트뷰 바닥으로 (애니메이션으로) 끌어내려주기 => 스크롤을 맨 밑으로 내리자.
+//                    맨 밑 : 마지막 댓글을 보러 가자. => ex. 10개 댓글 : 0~9번 => 9번 댓글로 이동.
+//                    전체 갯수 - 1번째 댓글로 이동.
+                    replyListView.smoothScrollToPosition(mReplyArrayList.size - 1)
+
                 }
 
             }
