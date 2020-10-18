@@ -72,6 +72,21 @@ class MainActivity : BaseActivity() {
 
 //        노티 아이콘 보여야함
         notiImg.visibility = View.VISIBLE
+        getNotiCountFromServer()
+
+    }
+
+//    서버에서 안읽은 알림이 몇개인지 가져오는 기능
+
+    fun getNotiCountFromServer() {
+
+        ServerUtil.getRequestNotiCount(mContext, object : ServerUtil.JsonResponseHandler {
+
+            override fun onResponse(json: JSONObject) {
+
+            }
+
+        })
 
     }
 
